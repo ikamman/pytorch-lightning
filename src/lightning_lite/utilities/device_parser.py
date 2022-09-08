@@ -9,6 +9,7 @@ import torch
 # from lightning_lite.strategies.launchers.multiprocessing import _is_forking_disabled
 from lightning_lite.utilities.exceptions import MisconfigurationException
 from lightning_lite.utilities.types import _DEVICE
+from pytorch_lightning.accelerators.mps import _MPS_AVAILABLE
 
 
 def determine_root_gpu_device(gpus: List[_DEVICE]) -> Optional[_DEVICE]:
@@ -215,7 +216,6 @@ def _get_all_available_mps_gpus() -> List[int]:
         A list of all available MPS GPUs
     """
     # lazy import to avoid circular dependencies
-    from lightning_lite.accelerators.mps import _MPS_AVAILABLE
     return [0] if _MPS_AVAILABLE else []
 
 
